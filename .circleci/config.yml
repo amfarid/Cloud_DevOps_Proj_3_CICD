@@ -11,6 +11,7 @@ commands:
         event: fail
         channel: CircleCI_Notification
         template: basic_fail_1
+
 # commands:
 #   destroy-environment:
 #     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -314,7 +315,7 @@ jobs:
 #             fi
   - notify_on_success:
     docker:
-      - image: cimg/base
+      - image: cimg/base:stable
     steps:
       - slack/notify:
           event: pass
