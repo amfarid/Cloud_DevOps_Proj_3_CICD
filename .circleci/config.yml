@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@4.9.3
+  slack: circleci/slack@4.10.1
 
 
 commands:
@@ -15,8 +15,8 @@ commands:
   install_awscli:
     description: Install AWS CLI v2
     steps:
-      - run:
-          name: Install AWS CLI v2
+      - run: 
+          name : install aws cli 
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
@@ -34,8 +34,8 @@ commands:
            sudo apt update
            sudo apt install -y ansible
               
-  destroy-environment:
-    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+  destroy_environment:
+    description: Destroy backend  cloudformation stacks with  workflow ID.
     parameters:
       workflow_id:
         type: string
@@ -213,14 +213,14 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-
-      - destroy-environment    
+      - destroy_environment  
 
   configure-infrastructure:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
+      - install_awscli
       - install_ansible
       - add_ssh_keys:
           fingerprints: ["3d:44:f7:66:b5:c5:32:b1:75:9c:8b:a3:88:11:7c:b5"]
@@ -229,10 +229,10 @@ jobs:
       - run:
           name: Configure server
           command: |
-            cd .circleci/ansible/
+            cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
-      - destroy-environment 
+      - destroy_environment
 
 #   run-migrations:
 #     docker:
