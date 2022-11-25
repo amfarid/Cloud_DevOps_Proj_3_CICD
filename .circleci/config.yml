@@ -33,6 +33,25 @@ commands:
            sudo add-apt-repository --yes --update ppa:ansible/ansible
            sudo apt update
            sudo apt install -y ansible
+
+  install-tar: 
+      steps:
+      - run: 
+          name : install taz
+          command: |
+            yum -y install tar gzip
+  install-node:
+    description: Install Node.js 13.8.0
+    steps:
+      - run:
+          name: Install Node.js 13.8.0
+          command: |
+            # Install Node.js LTS version as our base Node.js version
+            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            sudo apt install -y nodejs
+            # Use n version manager to use Node.js v13.8.0
+            sudo npm install --global n
+            sudo n 13.8.0
               
   destroy_environment:
     description: Destroy backend  cloudformation stacks with  workflow ID.
@@ -222,6 +241,7 @@ jobs:
       - checkout
       - install_awscli
       - install_ansible
+      - install-node
       - add_ssh_keys:
           fingerprints: ["3d:44:f7:66:b5:c5:32:b1:75:9c:8b:a3:88:11:7c:b5"]
       - attach_workspace:
