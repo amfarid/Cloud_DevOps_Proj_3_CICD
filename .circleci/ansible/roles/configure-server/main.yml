@@ -7,13 +7,11 @@
 
     sudo npm install -g n
     sudo n 13.8.0
-
-
+    
 - name: "Install PM2 Globally"
   npm:
     name: pm2
     global: yes
-
 
 - name: "move env variables to /etc/profile.d/"
   become: true
