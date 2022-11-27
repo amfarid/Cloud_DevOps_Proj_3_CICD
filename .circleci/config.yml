@@ -256,7 +256,7 @@ jobs:
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy_environment
 
-run-migrations:
+  run-migrations:
     docker:
       - image: cimg/python:3.11.0-node   
     steps:
@@ -291,7 +291,7 @@ run-migrations:
       - destroy_environment
       - revert-migrations    
 
-notify_on_success:
+  notify_on_success:
     docker:
       - image: cimg/base:stable
     steps:
