@@ -308,7 +308,7 @@ jobs:
       - install_ansible
       - install-node
       - restore_cache:
-          keys: [frontend-build]
+          keys: [frontend-deps]
       - add_ssh_keys:
           fingerprints: ["3d:44:f7:66:b5:c5:32:b1:75:9c:8b:a3:88:11:7c:b5"]
       - run:
@@ -344,7 +344,7 @@ jobs:
       - install_ansible
       - install-node
       - restore_cache:
-          keys: [backend-build]
+          keys: [backend-deps]
       - attach_workspace:
           at: ~/
       - run:
@@ -358,7 +358,6 @@ jobs:
       - run:
           name: Package Backend
           command: |
-
             cd backend
             npm run build
             tar -czf artifact.tar.gz dist/* package*
