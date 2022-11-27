@@ -411,7 +411,7 @@ jobs:
             else
               exit 1
             fi  
-      - destroy_environment
+            
 
 #   cloudfront-update:
 #     docker:
