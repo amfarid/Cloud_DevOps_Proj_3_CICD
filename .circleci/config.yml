@@ -291,6 +291,14 @@ run-migrations:
       - destroy_environment
       - revert-migrations    
 
+notify_on_success:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - slack/notify:
+          event: pass
+          channel: circlecinotification
+          template: success_tagged_deployment_1        
 
 #   deploy-frontend:
 #     docker:
@@ -386,14 +394,7 @@ run-migrations:
 #             then
 #               # your code here
 #             fi
-  notify_on_success:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - slack/notify:
-          event: pass
-          channel: circlecinotification
-          template: success_tagged_deployment_1           
+
 
 workflows:
   default:
