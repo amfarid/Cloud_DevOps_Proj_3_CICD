@@ -261,8 +261,8 @@ jobs:
       - image: cimg/python:3.11.0-node   
     steps:
       - checkout
-      - install-awscli
-      - install-ansible
+      - install_awscli
+      - install_ansible
       - install-node
       - restore_cache:
           keys:
@@ -290,7 +290,6 @@ jobs:
             fi
       - destroy_environment
       - revert-migrations    
-
   notify_on_success:
     docker:
       - image: cimg/base:stable
